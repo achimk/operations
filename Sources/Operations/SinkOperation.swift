@@ -45,8 +45,18 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
 
     // MARK: Init
 
-    init(input result: Result<Input, Failure>? = nil,
-         transform: @escaping (Input, @escaping (Result<Output, Failure>) -> ()) -> Cancelable)
+    public convenience init(input result: Result<Input, Failure>? = nil,
+                            transform: @escaping (Input) -> Result<Output, Failure>)
+    {
+        self.init(input: result, transform: { (input, completion) in
+            let result = transform(input)
+            completion(result)
+            return Cancelables.make()
+        })
+    }
+
+    public init(input result: Result<Input, Failure>? = nil,
+                transform: @escaping (Input, @escaping (Result<Output, Failure>) -> ()) -> Cancelable)
     {
 
         let input = InputResult(result)

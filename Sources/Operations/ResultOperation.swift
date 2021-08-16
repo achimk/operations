@@ -1,6 +1,9 @@
 
 open class ResultOperation<Success, Failure: Error>: AsyncOperation {
-    private(set) var result: Result<Success, Failure>?
+
+    // MARK: Properties
+
+    public private(set) var result: Result<Success, Failure>?
     private let transform: (@escaping (Result<Success, Failure>) -> ()) -> Cancelable
     private var cancelToken: Cancelable?
 
