@@ -10,6 +10,16 @@
 		276A17A926CADF1B00581C03 /* Operations.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 276A179F26CADF1B00581C03 /* Operations.framework */; };
 		276A17AE26CADF1B00581C03 /* OperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 276A17AD26CADF1B00581C03 /* OperationsTests.swift */; };
 		276A17B026CADF1B00581C03 /* Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 276A17A226CADF1B00581C03 /* Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		27CFD21F26CAE03100FEF810 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */; };
+		27CFD22426CAE0D500FEF810 /* OperationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD22326CAE0D500FEF810 /* OperationState.swift */; };
+		27CFD22D26CAE4E200FEF810 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD22C26CAE4E200FEF810 /* Cancelable.swift */; };
+		27CFD23326CAE50300FEF810 /* NopCancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD23226CAE50300FEF810 /* NopCancelable.swift */; };
+		27CFD23726CAE51600FEF810 /* AnyCancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD23626CAE51600FEF810 /* AnyCancelable.swift */; };
+		27CFD23B26CAE59000FEF810 /* Cancelables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD23A26CAE59000FEF810 /* Cancelables.swift */; };
+		27CFD24226CAE5C900FEF810 /* Operation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD24126CAE5C900FEF810 /* Operation+Extensions.swift */; };
+		27CFD24826CAE5FE00FEF810 /* Operations+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD24726CAE5FE00FEF810 /* Operations+Helpers.swift */; };
+		27CFD24C26CAE6FA00FEF810 /* ResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD24B26CAE6FA00FEF810 /* ResultOperation.swift */; };
+		27CFD25026CAE7CD00FEF810 /* SinkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD24F26CAE7CD00FEF810 /* SinkOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +39,16 @@
 		276A17A826CADF1B00581C03 /* OperationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		276A17AD26CADF1B00581C03 /* OperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationsTests.swift; sourceTree = "<group>"; };
 		276A17AF26CADF1B00581C03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		27CFD22326CAE0D500FEF810 /* OperationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationState.swift; sourceTree = "<group>"; };
+		27CFD22C26CAE4E200FEF810 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
+		27CFD23226CAE50300FEF810 /* NopCancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NopCancelable.swift; sourceTree = "<group>"; };
+		27CFD23626CAE51600FEF810 /* AnyCancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCancelable.swift; sourceTree = "<group>"; };
+		27CFD23A26CAE59000FEF810 /* Cancelables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelables.swift; sourceTree = "<group>"; };
+		27CFD24126CAE5C900FEF810 /* Operation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operation+Extensions.swift"; sourceTree = "<group>"; };
+		27CFD24726CAE5FE00FEF810 /* Operations+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Operations+Helpers.swift"; sourceTree = "<group>"; };
+		27CFD24B26CAE6FA00FEF810 /* ResultOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultOperation.swift; sourceTree = "<group>"; };
+		27CFD24F26CAE7CD00FEF810 /* SinkOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +91,10 @@
 		276A17A126CADF1B00581C03 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				27CFD24026CAE5B800FEF810 /* Extensions */,
+				27CFD22B26CAE4D900FEF810 /* Cancelable */,
+				27CFD22226CAE0CC00FEF810 /* States */,
+				27CFD21D26CAE01800FEF810 /* Operations */,
 				276A17A226CADF1B00581C03 /* Operations.h */,
 				276A17A326CADF1B00581C03 /* Info.plist */,
 			);
@@ -84,6 +108,44 @@
 				276A17AF26CADF1B00581C03 /* Info.plist */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		27CFD21D26CAE01800FEF810 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */,
+				27CFD24B26CAE6FA00FEF810 /* ResultOperation.swift */,
+				27CFD24F26CAE7CD00FEF810 /* SinkOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		27CFD22226CAE0CC00FEF810 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				27CFD22326CAE0D500FEF810 /* OperationState.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
+		27CFD22B26CAE4D900FEF810 /* Cancelable */ = {
+			isa = PBXGroup;
+			children = (
+				27CFD22C26CAE4E200FEF810 /* Cancelable.swift */,
+				27CFD23A26CAE59000FEF810 /* Cancelables.swift */,
+				27CFD23226CAE50300FEF810 /* NopCancelable.swift */,
+				27CFD23626CAE51600FEF810 /* AnyCancelable.swift */,
+			);
+			path = Cancelable;
+			sourceTree = "<group>";
+		};
+		27CFD24026CAE5B800FEF810 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				27CFD24126CAE5C900FEF810 /* Operation+Extensions.swift */,
+				27CFD24726CAE5FE00FEF810 /* Operations+Helpers.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,6 +209,7 @@
 				TargetAttributes = {
 					276A179E26CADF1B00581C03 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 					276A17A726CADF1B00581C03 = {
 						CreatedOnToolsVersion = 12.3;
@@ -194,6 +257,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27CFD21F26CAE03100FEF810 /* AsyncOperation.swift in Sources */,
+				27CFD24C26CAE6FA00FEF810 /* ResultOperation.swift in Sources */,
+				27CFD23326CAE50300FEF810 /* NopCancelable.swift in Sources */,
+				27CFD23726CAE51600FEF810 /* AnyCancelable.swift in Sources */,
+				27CFD25026CAE7CD00FEF810 /* SinkOperation.swift in Sources */,
+				27CFD23B26CAE59000FEF810 /* Cancelables.swift in Sources */,
+				27CFD22D26CAE4E200FEF810 /* Cancelable.swift in Sources */,
+				27CFD24826CAE5FE00FEF810 /* Operations+Helpers.swift in Sources */,
+				27CFD22426CAE0D500FEF810 /* OperationState.swift in Sources */,
+				27CFD24226CAE5C900FEF810 /* Operation+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +414,7 @@
 		276A17B426CADF1B00581C03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -357,6 +431,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -365,6 +440,7 @@
 		276A17B526CADF1B00581C03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -389,6 +465,7 @@
 		276A17B726CADF1B00581C03 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -406,6 +483,7 @@
 		276A17B826CADF1B00581C03 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
