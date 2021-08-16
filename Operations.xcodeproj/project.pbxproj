@@ -30,6 +30,8 @@
 		27CFD29F26CAF54F00FEF810 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD29E26CAF54F00FEF810 /* Task.swift */; };
 		27CFD2AB26CAF60700FEF810 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD2A526CAF60500FEF810 /* TaskTests.swift */; };
 		27CFD2B426CAF64000FEF810 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD2B026CAF63500FEF810 /* Types.swift */; };
+		27CFD2BA26CAF7AD00FEF810 /* AsyncBlockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD2B926CAF7AD00FEF810 /* AsyncBlockOperation.swift */; };
+		27CFD2C326CAF82000FEF810 /* AsyncBlockOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD2BD26CAF81400FEF810 /* AsyncBlockOperationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		27CFD29E26CAF54F00FEF810 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		27CFD2A526CAF60500FEF810 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		27CFD2B026CAF63500FEF810 /* Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
+		27CFD2B926CAF7AD00FEF810 /* AsyncBlockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBlockOperation.swift; sourceTree = "<group>"; };
+		27CFD2BD26CAF81400FEF810 /* AsyncBlockOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncBlockOperationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */,
+				27CFD2B926CAF7AD00FEF810 /* AsyncBlockOperation.swift */,
 				27CFD24B26CAE6FA00FEF810 /* ResultOperation.swift */,
 				27CFD24F26CAE7CD00FEF810 /* SinkOperation.swift */,
 			);
@@ -177,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				27CFD25426CAF03000FEF810 /* OperationTestCase.swift */,
+				27CFD2BD26CAF81400FEF810 /* AsyncBlockOperationTests.swift */,
 				27CFD26B26CAF1D300FEF810 /* ResultOperationTests.swift */,
 				27CFD28926CAF2F300FEF810 /* SinkOperationTests.swift */,
 			);
@@ -337,6 +343,7 @@
 				27CFD22D26CAE4E200FEF810 /* Cancelable.swift in Sources */,
 				27CFD24826CAE5FE00FEF810 /* Operations+Helpers.swift in Sources */,
 				27CFD22426CAE0D500FEF810 /* OperationState.swift in Sources */,
+				27CFD2BA26CAF7AD00FEF810 /* AsyncBlockOperation.swift in Sources */,
 				27CFD24226CAE5C900FEF810 /* Operation+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +359,7 @@
 				27CFD28D26CAF2FE00FEF810 /* SinkOperationTests.swift in Sources */,
 				27CFD28426CAF2BC00FEF810 /* assertMainThread.swift in Sources */,
 				27CFD29626CAF35000FEF810 /* TestError.swift in Sources */,
+				27CFD2C326CAF82000FEF810 /* AsyncBlockOperationTests.swift in Sources */,
 				27CFD25A26CAF04A00FEF810 /* OperationTestCase.swift in Sources */,
 				27CFD26626CAF0BF00FEF810 /* OperationHelpersTests.swift in Sources */,
 				27CFD27F26CAF2B800FEF810 /* Result+Extensions.swift in Sources */,
