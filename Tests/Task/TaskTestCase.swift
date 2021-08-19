@@ -11,7 +11,6 @@ class TaskTestCase: XCTestCase {
         output: () -> Result<T, Error>?,
         cancel: () -> ())
 
-    @discardableResult
     func enqueue<T>(_ task: Task<T>) -> EnqueueResult<T> {
         let mutableBox = MutableBox<Result<T, Error>?>(nil)
         let expectation = self.expectation(description: "finish")
