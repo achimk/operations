@@ -4,7 +4,7 @@ public final class Task<T> {
     internal let resultOperation: ResultOperation<T>
     internal let operations: [Operation]
 
-    public static func create() -> Task<T> where T == Void {
+    public static func create() -> Task<Void> where T == Void {
         return Task(value: ())
     }
 
@@ -22,7 +22,7 @@ public final class Task<T> {
     }
 
     internal init(resultOperation: ResultOperation<T>,
-                  operations: [Foundation.Operation])
+                  operations: [Operation])
     {
         self.resultOperation = resultOperation
         self.operations = operations
