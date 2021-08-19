@@ -20,7 +20,7 @@ open class AsyncOperation: Operation {
         return ["state"]
     }
 
-    // MARK: Properties
+    // MARK: State
 
     private let stateQueue = DispatchQueue(
         label: "OperationQueue.AysncOperation.State",
@@ -41,7 +41,7 @@ open class AsyncOperation: Operation {
         }
     }
 
-    // MARK: State
+    // MARK: State Flags
 
     open override var isReady: Bool {
         return state == .ready && super.isReady
@@ -55,31 +55,31 @@ open class AsyncOperation: Operation {
         return state == .finished
     }
 
-    open override var isAsynchronous: Bool {
-        return true
+    // MARK: Execution Strategy
+
+    private lazy var exectutionStrategy: OperationExecutionStrategy = makeExecutionStrategy()
+
+    public func makeExecutionStrategy() -> OperationExecutionStrategy {
+        return OperationExecutionStrategy
+            .isNotCanceled
+            .and(.hasNotCanceledDependencies)
     }
 
     // MARK: Foundation.Operation
 
     public final override func start() {
-        // Foundation.Operation.start() contains important logic that shouldn't be bypassed.
-        super.start()
-
-        // If the operation has been cancelled, we still need to enter the "Finished" state.
-        if isCancelled {
+        guard exectutionStrategy.canExecute(operation: self) else {
             finish()
+            return
         }
+
+        state = .executing
+        main()
     }
 
     public final override func main() {
-        assert(state == .ready, "This operation must be performed on an operation queue.")
-
-        if !isCancelled {
-            state = .executing
-            onExecute()
-        } else {
-            finish()
-        }
+        assert(state == .executing, "This operation must be performed on an operation queue.")
+        onExecute()
     }
 
     public final override func cancel() {
@@ -88,10 +88,10 @@ open class AsyncOperation: Operation {
         super.cancel()
     }
 
-    // MARK: Public
+    // MARK: Public Override
 
     open func onExecute() {
-        assertionFailure("Subclasses should override `onExecute()` method!")
+        abstractMethod()
     }
 
     open func onFinish() {

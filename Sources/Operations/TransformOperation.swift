@@ -1,10 +1,10 @@
 
-open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output, Failure> {
+open class TransformOperation<Input, Output>: ResultOperation<Output> {
 
     fileprivate final class InputResult {
-        var result: Result<Input, Failure>?
+        var result: Result<Input, Error>?
 
-        init(_ result: Result<Input, Failure>?) {
+        init(_ result: Result<Input, Error>?) {
             self.result = result
         }
     }
@@ -23,7 +23,7 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
 
     private var unsafeInput: InputResult
 
-    private var input: Result<Input, Failure>? {
+    private var input: Result<Input, Error>? {
         get {
             return inputQueue.sync(execute: { unsafeInput.result })
         }
@@ -37,7 +37,7 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
         }
     }
 
-    // MARK: State
+    // MARK: State Flags
 
     open override var isReady: Bool {
         return input != nil && super.isReady
@@ -45,8 +45,18 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
 
     // MARK: Init
 
-    public convenience init(input result: Result<Input, Failure>? = nil,
-                            transform: @escaping (Input) -> Result<Output, Failure>)
+    public convenience init(input result: Result<Input, Error>? = nil,
+                            transform: @escaping (Input) throws -> Output)
+    {
+        self.init(input: result, transform: { (input, completion) in
+            let result = Result<Output, Error>(catching: { try transform(input) })
+            completion(result)
+            return Cancelables.make()
+        })
+    }
+
+    public convenience init(input result: Result<Input, Error>? = nil,
+                            transform: @escaping (Input) -> Result<Output, Error>)
     {
         self.init(input: result, transform: { (input, completion) in
             let result = transform(input)
@@ -55,10 +65,19 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
         })
     }
 
-    public init(input result: Result<Input, Failure>? = nil,
-                transform: @escaping (Input, @escaping (Result<Output, Failure>) -> ()) -> Cancelable)
+    public convenience init(input result: Result<Input, Error>? = nil,
+                            transform: @escaping (Input, @escaping (Result<Output, Error>) -> ()) -> Cancelable)
     {
+        self.init(input: result, transform: transform, recover: { (error, completion) in
+            completion(.failure(error))
+            return Cancelables.make()
+        })
+    }
 
+    public init(input result: Result<Input, Error>? = nil,
+                transform: @escaping (Input, @escaping (Result<Output, Error>) -> ()) -> Cancelable,
+                recover: @escaping (Error, @escaping (Result<Output, Error>) -> ()) -> Cancelable)
+    {
         let input = InputResult(result)
         self.unsafeInput = input
         super.init { (completion) -> Cancelable in
@@ -70,8 +89,7 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
             case .success(let value):
                 return transform(value, completion)
             case .failure(let error):
-                completion(.failure(error))
-                return Cancelables.make()
+                return recover(error, completion)
             }
         }
     }
@@ -82,11 +100,11 @@ open class SinkOperation<Input, Output, Failure: Error>: ResultOperation<Output,
         sink(result: .success(value))
     }
 
-    public func sink(error: Failure) {
+    public func sink(error: Error) {
         sink(result: .failure(error))
     }
 
-    public func sink(result: Result<Input, Failure>) {
+    public func sink(result: Result<Input, Error>) {
         if input == nil {
             input = result
         }
