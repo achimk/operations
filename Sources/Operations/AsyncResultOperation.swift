@@ -1,5 +1,5 @@
 
-open class ResultOperation<Success>: AsyncOperation {
+open class AsyncResultOperation<Success>: AsyncOperation {
 
     // MARK: Properties
 

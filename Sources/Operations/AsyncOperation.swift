@@ -23,7 +23,7 @@ open class AsyncOperation: Operation {
     // MARK: State
 
     private let stateQueue = DispatchQueue(
-        label: "OperationQueue.AysncOperation.State",
+        label: "OperationQueue.AsyncOperation.State",
         attributes: .concurrent)
 
     private var unsafeState: OperationState = .ready

@@ -1,5 +1,5 @@
 
-open class TransformOperation<Input, Output>: ResultOperation<Output> {
+open class AsyncTransformOperation<Input, Output>: AsyncResultOperation<Output> {
 
     fileprivate final class InputResult {
         var result: Result<Input, Error>?
@@ -18,7 +18,7 @@ open class TransformOperation<Input, Output>: ResultOperation<Output> {
     // MARK: Properties
 
     private let inputQueue = DispatchQueue(
-        label: "OperationQueue.SinkOperation.Input",
+        label: "OperationQueue.AsyncTransformOperation.Input",
         attributes: .concurrent)
 
     private var unsafeInput: InputResult

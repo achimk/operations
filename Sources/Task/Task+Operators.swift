@@ -2,7 +2,7 @@
 extension Task {
 
     public func bind<U>(_ transform: @escaping (T, @escaping (Result<U, Error>) -> ()) -> Cancelable) -> Task<U> {
-        let outputOperation = TransformOperation(transform: transform)
+        let outputOperation = AsyncTransformOperation(transform: transform)
         resultOperation.addCompletionBlock { [weak resultOperation] in
             guard let result = resultOperation?.result else { return }
             outputOperation.sink(result: result)

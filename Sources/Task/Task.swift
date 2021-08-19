@@ -1,7 +1,7 @@
 import Foundation
 
 public final class Task<T> {
-    internal let resultOperation: ResultOperation<T>
+    internal let resultOperation: AsyncResultOperation<T>
     internal let operations: [Operation]
 
     public static func create() -> Task<Void> where T == Void {
@@ -17,11 +17,11 @@ public final class Task<T> {
     }
 
     public init(result: Result<T, Error>) {
-        self.resultOperation = ResultOperation(result: result)
+        self.resultOperation = AsyncResultOperation(result: result)
         self.operations = [resultOperation]
     }
 
-    internal init(resultOperation: ResultOperation<T>,
+    internal init(resultOperation: AsyncResultOperation<T>,
                   operations: [Operation])
     {
         self.resultOperation = resultOperation

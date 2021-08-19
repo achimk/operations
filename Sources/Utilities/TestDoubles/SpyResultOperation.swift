@@ -1,14 +1,14 @@
 
-final class SpyResultOperation<Success>: ResultOperation<Success> {
+final class SpyAsyncResultOperation<Success>: AsyncResultOperation<Success> {
 
     // MARK: Properties
 
-    var onPreCancel: ((ResultOperation<Success>) -> ())?
-    var onPostCancel: ((ResultOperation<Success>) -> ())?
-    var onPreExecute: ((ResultOperation<Success>) -> ())?
-    var onPostExecute: ((ResultOperation<Success>) -> ())?
-    var onPreFinish: ((ResultOperation<Success>) -> ())?
-    var onPostFinish: ((ResultOperation<Success>) -> ())?
+    var onPreCancel: ((AsyncResultOperation<Success>) -> ())?
+    var onPostCancel: ((AsyncResultOperation<Success>) -> ())?
+    var onPreExecute: ((AsyncResultOperation<Success>) -> ())?
+    var onPostExecute: ((AsyncResultOperation<Success>) -> ())?
+    var onPreFinish: ((AsyncResultOperation<Success>) -> ())?
+    var onPostFinish: ((AsyncResultOperation<Success>) -> ())?
 
     // MARK: Public
 

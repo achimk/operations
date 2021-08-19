@@ -2,7 +2,7 @@
 extension Task {
 
     public func recover(_ transform: @escaping (Error, @escaping (Result<T, Error>) -> ()) -> Cancelable) -> Task<T> {
-        let outputOperation = TransformOperation<T, T>(transform: { (value, completion) in
+        let outputOperation = AsyncTransformOperation<T, T>(transform: { (value, completion) in
             completion(.success(value))
             return Cancelables.make()
         }, recover: { (error, completion) in

@@ -25,7 +25,7 @@ class TaskNotifyTests: TaskTestCase {
         XCTAssertNotNil(result as? TestError)
     }
 
-    func test_onResultOperation_shouldNotifyCorrectly() {
+    func test_onAsyncResultOperation_shouldNotifyCorrectly() {
         var result: Result<Int, Error>?
         let task = Task(value: 1).onResult { (res) in
             result = res
@@ -36,7 +36,7 @@ class TaskNotifyTests: TaskTestCase {
         XCTAssertEqual(result?.value, 1)
     }
 
-    func test_onResultOperationPipeline_shouldNotifyInCorrectOrder() {
+    func test_onAsyncResultOperationPipeline_shouldNotifyInCorrectOrder() {
         var output: [Int] = []
         let task = Task(value: 1)
             .onSuccess { _ in output.append(1) }

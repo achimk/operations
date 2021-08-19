@@ -2,10 +2,10 @@ import XCTest
 import Foundation
 import Operations
 
-class TransformOperationTests: OperationTestCase {
+class AsyncTransformOperationTests: OperationTestCase {
 
-    func test_successTransformOperation_shouldReturnCorrectResult() {
-        let incrementOperation = TransformOperation<Int, Int> { (value, completion) -> Cancelable in
+    func test_successAsyncTransformOperation_shouldReturnCorrectResult() {
+        let incrementOperation = AsyncTransformOperation<Int, Int> { (value, completion) -> Cancelable in
             completion(.success(value + 1))
             return Cancelables.make()
         }
@@ -19,8 +19,8 @@ class TransformOperationTests: OperationTestCase {
         XCTAssertEqual(incrementOperation.result?.value, 4)
     }
 
-    func test_failureTransformOperation_shouldReturnCorrectResult() {
-        let incrementOperation = TransformOperation<Int, Int> { (value, completion) -> Cancelable in
+    func test_failureAsyncTransformOperation_shouldReturnCorrectResult() {
+        let incrementOperation = AsyncTransformOperation<Int, Int> { (value, completion) -> Cancelable in
             completion(.failure(TestError.instance))
             return Cancelables.make()
         }
@@ -35,7 +35,7 @@ class TransformOperationTests: OperationTestCase {
     }
 
     func test_whenSinkInvoked_operationShouldBeReady() {
-        let incrementOperation = TransformOperation<Int, Int> { (value) -> Result<Int, Error> in
+        let incrementOperation = AsyncTransformOperation<Int, Int> { (value) -> Result<Int, Error> in
             return .success(value + 1)
         }
 
@@ -45,7 +45,7 @@ class TransformOperationTests: OperationTestCase {
     }
 
     func test_whenSinkNotInvoked_operationShouldNotBeReady() {
-        let incrementOperation = TransformOperation<Int, Int> { (value) -> Result<Int, Error> in
+        let incrementOperation = AsyncTransformOperation<Int, Int> { (value) -> Result<Int, Error> in
             return .success(value + 1)
         }
 
