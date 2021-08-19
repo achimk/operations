@@ -5,8 +5,7 @@ class TaskBenchmarkTests: TaskTestCase {
 
     // Run only for debug to discover invalid state changes over Operation implementation
     func test_multipeCalls_shouldPassAll() {
-        for index in 0..<1000 {
-            print("=> run: \(index)")
+        for _ in 0..<1000 {
             assert_runAsyncTasksInPipeline_shouldProduceCorrectResult()
         }
     }

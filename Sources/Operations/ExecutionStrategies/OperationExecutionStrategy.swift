@@ -15,11 +15,11 @@ open class OperationExecutionStrategy {
 
 extension OperationExecutionStrategy {
 
-    public static let allowed: OperationExecutionStrategy = {
+    public static let alwaysAllowed: OperationExecutionStrategy = {
         return ConditionExecutionStrategy { _ in return true }
     }()
 
-    public static let denied: OperationExecutionStrategy = {
+    public static let alwaysDenied: OperationExecutionStrategy = {
         return ConditionExecutionStrategy { _ in return false }
     }()
 

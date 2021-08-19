@@ -5,7 +5,27 @@ open class AsyncResultOperation<Success>: AsyncOperation {
 
     public private(set) var result: Result<Success, Error>?
     private let transform: (@escaping (Result<Success, Error>) -> ()) -> Cancelable
-    private var cancelToken: Cancelable?
+
+    // MARK: Cancel Token
+
+    private let cancelTokenQueue = DispatchQueue(
+        label: "OperationQueue.AsyncResultOperation.CancelToken",
+        attributes: .concurrent)
+
+    private var unsafeCancelToken: Cancelable?
+
+    private var cancelToken: Cancelable? {
+        get {
+            return cancelTokenQueue.sync(execute: { unsafeCancelToken })
+        }
+        set {
+            willChangeValue(forKey: "cancelToken")
+            cancelTokenQueue.sync(
+                flags: .barrier,
+                execute: { unsafeCancelToken = newValue })
+            didChangeValue(forKey: "cancelToken")
+        }
+    }
 
     // MARK: Init
 
@@ -23,7 +43,7 @@ open class AsyncResultOperation<Success>: AsyncOperation {
     // MARK: Execution Strategy
 
     public override func makeExecutionStrategy() -> OperationExecutionStrategy {
-        return OperationExecutionStrategy.allowed
+        return OperationExecutionStrategy.alwaysAllowed
     }
 
     // MARK: Public Override
@@ -44,7 +64,12 @@ open class AsyncResultOperation<Success>: AsyncOperation {
         if isCancelled {
             completion(.failure(OperationCanceledError()))
         } else {
-            cancelToken = transform(completion)
+            onTransform(completion: completion)
         }
+    }
+
+    public final func onTransform(completion: @escaping (Result<Success, Error>) -> ()) {
+        assert(cancelToken == nil, "Cancel token already set")
+        cancelToken = transform(completion)
     }
 }

@@ -4,8 +4,15 @@ import Operations
 
 class TaskTestCase: XCTestCase {
 
+    typealias EnqueueResult<T> = (
+        operations: () -> [Operation],
+        run: () -> (),
+        expectation: XCTestExpectation,
+        output: () -> Result<T, Error>?,
+        cancel: () -> ())
+
     @discardableResult
-    func enqueue<T>(_ task: Task<T>) -> (run: () -> (), expectation: XCTestExpectation, output: () -> Result<T, Error>?, cancel: () -> ()) {
+    func enqueue<T>(_ task: Task<T>) -> EnqueueResult<T> {
         let mutableBox = MutableBox<Result<T, Error>?>(nil)
         let expectation = self.expectation(description: "finish")
         let queue = OperationQueue()
@@ -15,7 +22,13 @@ class TaskTestCase: XCTestCase {
             expectation.fulfill()
         }
 
-        return ({ queue.isSuspended = false }, expectation, mutableBox.getValue, cancelToken.cancel)
+        let result: EnqueueResult<T>
+        result.operations = { queue.operations }
+        result.run = { queue.isSuspended = false }
+        result.expectation = expectation
+        result.output = mutableBox.getValue
+        result.cancel = cancelToken.cancel
+        return result
     }
 
     @discardableResult

@@ -94,6 +94,20 @@ open class AsyncTransformOperation<Input, Output>: AsyncResultOperation<Output> 
         }
     }
 
+    public override func onExecute(completion: @escaping (Result<Output, Error>) -> ()) {
+        assert(input != nil, "Empty state of input should never happen!")
+        if isCancelled {
+            switch input {
+            case .failure(let error):
+                completion(.failure(error))
+            default:
+                completion(.failure(OperationCanceledError()))
+            }
+        } else {
+            onTransform(completion: completion)
+        }
+    }
+
     // MARK: Sink
 
     public func sink(value: Input) {
