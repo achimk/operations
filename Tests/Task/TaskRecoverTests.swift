@@ -46,4 +46,25 @@ class TaskRecoverTests: TaskTestCase {
 
         XCTAssertTrue(result.output?.error is OtherTestError)
     }
+
+    func test_recoverSuccessOperation_shouldPropageValue() {
+        let task = Task<Int>(value: 1).recover { error -> Int in
+            return 2
+        }
+
+        let result = wait(for: task)
+
+        XCTAssertEqual(result.output?.value, 1)
+    }
+
+    func test_asyncRecoverSuccessOperation_shouldPropageValue() {
+        let task = Task<Int>(value: 1).recover { (error, completion) -> Cancelable in
+            completion(.failure(error))
+            return Cancelables.make()
+        }
+
+        let result = wait(for: task)
+
+        XCTAssertEqual(result.output?.value, 1)
+    }
 }
