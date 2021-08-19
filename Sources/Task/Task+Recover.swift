@@ -16,8 +16,7 @@ extension Task {
 
         return Task<T>(
             resultOperation: outputOperation,
-            operations: operations + [outputOperation],
-            queue: queue)
+            operations: operations + [outputOperation])
     }
 
     public func recover(_ transform: @escaping (Error) throws -> T) -> Task<T> {

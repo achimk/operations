@@ -11,24 +11,13 @@ extension Task {
 
         return Task<U>(
             resultOperation: outputOperation,
-            operations: operations + [outputOperation],
-            queue: queue)
+            operations: operations + [outputOperation])
     }
 
     public func map<U>(_ transform: @escaping (T) throws -> U) -> Task<U> {
-        let outputOperation = TransformOperation<T, U> { (value, completion) -> Cancelable in
-            completion(Result(catching: { try transform(value) }))
+        return bind { (input, completion) -> Cancelable in
+            completion(Result(catching: { try transform(input) }))
             return Cancelables.make()
         }
-        resultOperation.addCompletionBlock { [weak resultOperation] in
-            guard let result = resultOperation?.result else { return }
-            outputOperation.sink(result: result)
-        }
-        outputOperation.addDependency(resultOperation)
-
-        return Task<U>(
-            resultOperation: outputOperation,
-            operations: operations + [outputOperation],
-            queue: queue)
     }
 }

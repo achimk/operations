@@ -52,15 +52,12 @@ class TaskPipelineTests: TaskTestCase {
 
         let result = wait(for: task)
 
-        XCTAssertEqual(result.output?.isFailure, true)
-        XCTAssertTrue((result.output?.error as? TestError) != nil)
+        XCTAssertTrue(result.output?.error is TestError)
     }
 
     func test_runCancelTaskInPipeline_shouldReportCancelError() {
         let asyncGetValue: (Void, @escaping Completer<Int>) -> Cancelable = { (_, completion) in
-            return Cancelables.make {
-                completion(.failure(TestError.instance))
-            }
+            return Cancelables.make()
         }
 
         let asyncIncrementValue: (Int, Completer<Int>) -> Cancelable = { (value, completion) in
@@ -78,17 +75,12 @@ class TaskPipelineTests: TaskTestCase {
             .bind(asyncIncrementValue)
             .bind(asyncMapValue)
 
-        let result = run(task)
+        let result = enqueue(task)
+        result.cancel()
+        result.run()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            result.cancel()
-        }
+        wait(for: [result.expectation], timeout: 3)
 
-//        result.cancel()
-
-        wait(for: [result.expectation], timeout: 8)
-
-        print(result.output())
-        XCTAssertEqual(result.output()?.isFailure, true)
+        XCTAssertTrue(result.output()?.error is OperationCanceledError)
     }
 }
