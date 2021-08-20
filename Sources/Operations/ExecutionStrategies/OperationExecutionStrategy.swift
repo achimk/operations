@@ -7,10 +7,6 @@ open class OperationExecutionStrategy {
     open func canExecute(operation: Operation) -> Bool {
         abstractMethod()
     }
-
-    public func asExecutionStrategy() -> OperationExecutionStrategy {
-        return self
-    }
 }
 
 extension OperationExecutionStrategy {

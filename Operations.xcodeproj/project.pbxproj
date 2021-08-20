@@ -34,6 +34,9 @@
 		278A0CDA26CEFEA60038AF4D /* SpyResultOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A0BF026CD358A0038AF4D /* SpyResultOperation.swift */; };
 		278A0CE826CEFF1E0038AF4D /* OperationExecutionStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A0CE226CEFF1B0038AF4D /* OperationExecutionStrategyTests.swift */; };
 		278A0CF126CF01A20038AF4D /* ConditionExecutionStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278A0CED26CF019D0038AF4D /* ConditionExecutionStrategyTests.swift */; };
+		27B2147126D028C7001A65C6 /* OperationQueueExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2147026D028C7001A65C6 /* OperationQueueExtensionsTests.swift */; };
+		27B2147526D02A90001A65C6 /* OperationExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2147426D02A90001A65C6 /* OperationExtensionsTests.swift */; };
+		27B2147A26D02BEE001A65C6 /* AnyCancelableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B2147926D02BEE001A65C6 /* AnyCancelableTests.swift */; };
 		27CFD21F26CAE03100FEF810 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */; };
 		27CFD22426CAE0D500FEF810 /* OperationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD22326CAE0D500FEF810 /* OperationState.swift */; };
 		27CFD22D26CAE4E200FEF810 /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CFD22C26CAE4E200FEF810 /* Cancelable.swift */; };
@@ -92,6 +95,9 @@
 		278A0CCF26CEF8D00038AF4D /* CancelTokenObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelTokenObserver.swift; sourceTree = "<group>"; };
 		278A0CE226CEFF1B0038AF4D /* OperationExecutionStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExecutionStrategyTests.swift; sourceTree = "<group>"; };
 		278A0CED26CF019D0038AF4D /* ConditionExecutionStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionExecutionStrategyTests.swift; sourceTree = "<group>"; };
+		27B2147026D028C7001A65C6 /* OperationQueueExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueExtensionsTests.swift; sourceTree = "<group>"; };
+		27B2147426D02A90001A65C6 /* OperationExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationExtensionsTests.swift; sourceTree = "<group>"; };
+		27B2147926D02BEE001A65C6 /* AnyCancelableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCancelableTests.swift; sourceTree = "<group>"; };
 		27CFD21E26CAE03100FEF810 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		27CFD22326CAE0D500FEF810 /* OperationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationState.swift; sourceTree = "<group>"; };
 		27CFD22C26CAE4E200FEF810 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				27CFD27426CAF24400FEF810 /* TestDoubles */,
+				27B2147826D02BC3001A65C6 /* Cancelable */,
 				27CFD25F26CAF09B00FEF810 /* Extensions */,
 				27CFD25326CAF02300FEF810 /* Operations */,
 				27CFD2A426CAF5EC00FEF810 /* Task */,
@@ -211,6 +218,14 @@
 				278A0CED26CF019D0038AF4D /* ConditionExecutionStrategyTests.swift */,
 			);
 			path = ExecutionStrategies;
+			sourceTree = "<group>";
+		};
+		27B2147826D02BC3001A65C6 /* Cancelable */ = {
+			isa = PBXGroup;
+			children = (
+				27B2147926D02BEE001A65C6 /* AnyCancelableTests.swift */,
+			);
+			path = Cancelable;
 			sourceTree = "<group>";
 		};
 		27CFD21D26CAE01800FEF810 /* Operations */ = {
@@ -272,6 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				27CFD26026CAF0B100FEF810 /* OperationHelpersTests.swift */,
+				27B2147026D028C7001A65C6 /* OperationQueueExtensionsTests.swift */,
+				27B2147426D02A90001A65C6 /* OperationExtensionsTests.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -459,7 +476,9 @@
 				278A0CA726CEC7F30038AF4D /* TaskRecoverTests.swift in Sources */,
 				278A0C9B26CEC7CB0038AF4D /* TestError.swift in Sources */,
 				278A0C5826CEC4020038AF4D /* TaskOperatorsTests.swift in Sources */,
+				27B2147126D028C7001A65C6 /* OperationQueueExtensionsTests.swift in Sources */,
 				278A0CF126CF01A20038AF4D /* ConditionExecutionStrategyTests.swift in Sources */,
+				27B2147526D02A90001A65C6 /* OperationExtensionsTests.swift in Sources */,
 				278A0C1126CDA6510038AF4D /* BlockOperationTests.swift in Sources */,
 				278A0C5326CEC3A80038AF4D /* TaskTestCase.swift in Sources */,
 				27CFD28D26CAF2FE00FEF810 /* AsyncTransformOperationTests.swift in Sources */,
@@ -472,6 +491,7 @@
 				278A0CD326CEF8D40038AF4D /* CancelTokenObserver.swift in Sources */,
 				27CFD2C326CAF82000FEF810 /* AsyncBlockOperationTests.swift in Sources */,
 				27CFD25A26CAF04A00FEF810 /* OperationTestCase.swift in Sources */,
+				27B2147A26D02BEE001A65C6 /* AnyCancelableTests.swift in Sources */,
 				27CFD26626CAF0BF00FEF810 /* OperationHelpersTests.swift in Sources */,
 				278A0C7326CEC4F00038AF4D /* TaskPipelineTests.swift in Sources */,
 				278A0CE826CEFF1E0038AF4D /* OperationExecutionStrategyTests.swift in Sources */,

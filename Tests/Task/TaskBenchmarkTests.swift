@@ -27,9 +27,29 @@ class TaskBenchmarkTests: TaskTestCase {
         }
 
         let task = Task.create()
+            .onSuccess { _ in }
+            .onFailure { _ in }
+            .onResult { _ in }
+            .map { _ in () }
+            .recover { _ in () }
             .bind(asyncGetValue)
+            .onSuccess { _ in }
+            .onFailure { _ in }
+            .onResult { _ in }
+            .map { $0 }
+            .recover { _ in 1 }
             .bind(asyncIncrementValue)
+            .onSuccess { _ in }
+            .onFailure { _ in }
+            .onResult { _ in }
+            .map { $0 }
+            .recover { _ in 1 }
             .bind(asyncMapValue)
+            .onSuccess { _ in }
+            .onFailure { _ in }
+            .onResult { _ in }
+            .map { $0 }
+            .recover { _ in "1" }
 
         let result = wait(for: task)
 
