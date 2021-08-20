@@ -52,7 +52,7 @@ class OperationHelpersTests: XCTestCase {
         ]
 
         let expectation = self.expectation(description: "Finish")
-        let done = finishOpration(operations) {
+        let done = finishOperation(operations) {
             expectation.fulfill()
         }
 

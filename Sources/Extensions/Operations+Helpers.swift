@@ -1,11 +1,11 @@
 import Foundation
 
 public func onFinish(_ operations: [Operation], completion: @escaping () -> ()) {
-    let doneOperation = finishOpration(operations, completion: completion)
+    let doneOperation = finishOperation(operations, completion: completion)
     OperationQueue().addOperation(doneOperation)
 }
 
-public func finishOpration(_ operations: [Operation], completion: @escaping () -> ()) -> Operation {
+public func finishOperation(_ operations: [Operation], completion: @escaping () -> ()) -> Operation {
     let doneOperation = BlockOperation(block: completion)
     operations.forEach { doneOperation.addDependency($0) }
     return doneOperation
