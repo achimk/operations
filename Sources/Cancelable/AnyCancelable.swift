@@ -1,3 +1,4 @@
+import Foundation
 
 public final class AnyCancelable: Cancelable {
     private let lock = NSLock()

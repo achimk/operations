@@ -1,3 +1,4 @@
+import Foundation
 
 open class AsyncResultOperation<Success>: AsyncOperation {
 

@@ -1,3 +1,4 @@
+import Foundation
 
 open class AsyncTransformOperation<Input, Output>: AsyncResultOperation<Output> {
 
