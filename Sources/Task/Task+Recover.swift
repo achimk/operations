@@ -10,7 +10,7 @@ extension Task {
         })
         resultOperation.addCompletionBlock { [weak resultOperation] in
             guard let result = resultOperation?.result else { return }
-            outputOperation.sink(result: result)
+            outputOperation.accept(result: result)
         }
         outputOperation.addDependency(resultOperation)
 

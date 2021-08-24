@@ -11,7 +11,7 @@ class AsyncTransformOperationTests: OperationTestCase {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
-            incrementOperation.sink(value: 3)
+            incrementOperation.accept(value: 3)
         }
 
         waitFor(incrementOperation)
@@ -26,7 +26,7 @@ class AsyncTransformOperationTests: OperationTestCase {
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1)) {
-            incrementOperation.sink(value: 3)
+            incrementOperation.accept(value: 3)
         }
 
         waitFor(incrementOperation)
@@ -34,17 +34,17 @@ class AsyncTransformOperationTests: OperationTestCase {
         XCTAssertTrue(incrementOperation.result?.error is TestError)
     }
 
-    func test_whenSinkInvoked_operationShouldBeReady() {
+    func test_whenAcceptInvoked_operationShouldBeReady() {
         let incrementOperation = AsyncTransformOperation<Int, Int> { (value) -> Result<Int, Error> in
             return .success(value + 1)
         }
 
-        incrementOperation.sink(value: 1)
+        incrementOperation.accept(value: 1)
 
         XCTAssertTrue(incrementOperation.isReady)
     }
 
-    func test_whenSinkNotInvoked_operationShouldNotBeReady() {
+    func test_whenAcceptNotInvoked_operationShouldNotBeReady() {
         let incrementOperation = AsyncTransformOperation<Int, Int> { (value) -> Result<Int, Error> in
             return .success(value + 1)
         }

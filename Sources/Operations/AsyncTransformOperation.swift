@@ -29,7 +29,7 @@ open class AsyncTransformOperation<Input, Output>: AsyncResultOperation<Output> 
             return inputQueue.sync(execute: { unsafeInput.result })
         }
         set {
-            assert(newValue != nil && input == nil, "Invalid set state for sink operation!")
+            assert(newValue != nil && input == nil, "Invalid set state for accept operation!")
             willChangeValue(forKey: "input")
             inputQueue.sync(
                 flags: .barrier,
@@ -109,17 +109,17 @@ open class AsyncTransformOperation<Input, Output>: AsyncResultOperation<Output> 
         }
     }
 
-    // MARK: Sink
+    // MARK: Accept
 
-    public func sink(value: Input) {
-        sink(result: .success(value))
+    public func accept(value: Input) {
+        accept(result: .success(value))
     }
 
-    public func sink(error: Error) {
-        sink(result: .failure(error))
+    public func accept(error: Error) {
+        accept(result: .failure(error))
     }
 
-    public func sink(result: Result<Input, Error>) {
+    public func accept(result: Result<Input, Error>) {
         if input == nil {
             input = result
         }
